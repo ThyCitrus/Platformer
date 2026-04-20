@@ -1,0 +1,25 @@
+__pycache__
+.vscode
+Desktop/
+AppData/
+Documents/
+Downloads/
+# Everything outside pygame folder
+../
+../../
+../../../
+../../../../
+
+# Windows junk
+*.lnk
+Desktop/
+Documents/
+AppData/
+Downloads/
+Thumbs.db
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.env
