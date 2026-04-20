@@ -1,9 +1,5 @@
 __pycache__
 .vscode
-Desktop/
-AppData/
-Documents/
-Downloads/
 # Everything outside pygame folder
 ../
 ../../
