@@ -243,6 +243,15 @@ class Player:
         jump_key = keys[pygame.K_SPACE]
         slam_key = keys[pygame.K_RSHIFT]
 
+        # --- Slam ---
+        if slam_key and not self.on_ground and not self.slam_used:
+            self.vel_y = SLAM_FORCE
+            self.vel_x = 0.0
+            self.slide_vel_x = 0.0
+            self.sliding = False
+            self.slide_cooldown = False
+            self.slam_used = True
+
         # --- Horizontal ---
         if locked or (self.slide_cooldown and self.on_ground):
             self.feet_x += self.slide_vel_x
@@ -275,15 +284,6 @@ class Player:
             if self.jump_held:
                 self.vel_y *= JUMP_CUT
             self.jump_held = False
-
-        # --- Slam ---
-        if slam_key and not self.on_ground and not self.slam_used:
-            self.vel_y = SLAM_FORCE
-            self.vel_x = 0.0
-            self.slide_vel_x = 0.0
-            self.sliding = False
-            self.slide_cooldown = False
-            self.slam_used = True
 
         # --- Horizontal collision ---
         self.rect = self._make_rect()
