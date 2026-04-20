@@ -30,6 +30,8 @@ class Camera:
 
         if self.y > 1200 - HEIGHT and not player.feet_y > 1200:
             self.y = 1200 - HEIGHT
+        elif self.y > 1200 - HEIGHT and not player.feet_x > 4300:
+            self.y = 1200 - HEIGHT
 
         self.x += (target_x - self.x) * CAM_LERP
         self.y += (target_y - self.y) * CAM_LERP

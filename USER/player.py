@@ -1,6 +1,7 @@
 import pygame
 from DATA.constants import *
-from ENVIRONMENT.world import platforms, get_spawn
+import ENVIRONMENT.world as world
+from ENVIRONMENT.world import get_spawn
 
 
 def make_rect(fx, fy, w, h):
@@ -9,7 +10,7 @@ def make_rect(fx, fy, w, h):
 
 def can_stand(fx, fy):
     test = make_rect(fx, fy, STAND_W, STAND_H)
-    for plat in platforms:
+    for plat in world.platforms:
         if test.colliderect(plat):
             return False
     return True
@@ -286,7 +287,7 @@ class Player:
 
         # --- Horizontal collision ---
         self.rect = self._make_rect()
-        for plat in platforms:
+        for plat in world.platforms:
             if self.rect.colliderect(plat):
                 if self.vel_x > 0:
                     self.feet_x = float(plat.left - self.p_w // 2)
@@ -303,7 +304,7 @@ class Player:
         self.feet_y += self.vel_y
         self.rect = self._make_rect()
         self.last_vel_y = self.vel_y
-        for plat in platforms:
+        for plat in world.platforms:
             if self.rect.colliderect(plat):
                 if self.vel_y > 0:
                     self.feet_y = float(plat.top)
@@ -317,7 +318,7 @@ class Player:
 
         # --- Resolve remaining overlaps ---
         self.rect = self._make_rect()
-        for plat in platforms:
+        for plat in world.platforms:
             if self.rect.colliderect(plat):
                 ol = self.rect.right - plat.left
                 or_ = plat.right - self.rect.left
@@ -341,7 +342,7 @@ class Player:
 
         # --- Ground check ---
         ground_probe = pygame.Rect(self.rect.left, self.rect.bottom, self.rect.width, 1)
-        self.on_ground = any(ground_probe.colliderect(p) for p in platforms)
+        self.on_ground = any(ground_probe.colliderect(p) for p in world.platforms)
 
         if self.on_ground and not self.was_on_ground and not self.sliding:
             if self.last_vel_y >= 30:
