@@ -26,13 +26,6 @@ class Camera:
         target_x = player.feet_x - self.screen_w // 2 + self.lead_offset_x
         target_y = player.feet_y - self.screen_h // 2 + self.lead_offset_y
 
-        from main import HEIGHT  # Import here to avoid circular dependency
-
-        if self.y > 1200 - HEIGHT and not player.feet_y > 1200:
-            self.y = 1200 - HEIGHT
-        elif self.y > 1200 - HEIGHT and not player.feet_x > 4300:
-            self.y = 1200 - HEIGHT
-
         self.x += (target_x - self.x) * CAM_LERP
         self.y += (target_y - self.y) * CAM_LERP
 

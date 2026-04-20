@@ -69,7 +69,7 @@ while game_running:
     camera.update(player)
 
     # Apply camera bounds from current area
-    bounds = area_manager.get_cam_bounds()
+    bounds = area_manager.get_active_bounds(player)
     if bounds:
         if bounds.get("x_min") is not None:
             camera.x = max(camera.x, bounds["x_min"])
